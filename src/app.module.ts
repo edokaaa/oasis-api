@@ -3,7 +3,7 @@ import { RecipeModule } from './recipe/recipe.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Ingredient, Recipe } from './recipe/entity/recipe';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { validate } from 'config/env.validation';
+import { validate } from 'src/config/env.validation';
 
 @Module({
   imports: [
@@ -19,8 +19,8 @@ import { validate } from 'config/env.validation';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [Recipe, Ingredient],
-        synchronize: configService.get<boolean>('DB_SYNCHRONIZATION'),
-        logging: configService.get<boolean>('DB_LOGGIN'),
+        synchronize: false,
+        logging: configService.get<boolean>('DB_LOGGING'),
       })
     })
   ],
