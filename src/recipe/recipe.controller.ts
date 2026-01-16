@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { RecipeDto } from './dto/recipe.dto';
 import { UpdateDescriptionDto } from './dto/update-description.dto';
@@ -14,7 +14,7 @@ export class RecipeController {
     }
 
     @Get('/:id')
-    async getRecipe(@Param('id') id: string) {
+    async getRecipe(@Param('id', new ParseUUIDPipe()) id: string) {
         return await this.recipeService.getRecipe(id);
     }
 
@@ -24,12 +24,12 @@ export class RecipeController {
     }
 
     @Put('/:id')
-    async updateDescription(@Body() { description }: UpdateDescriptionDto, @Param('id') id: string) {
+    async updateDescription(@Body() { description }: UpdateDescriptionDto, @Param('id', new ParseUUIDPipe()) id: string) {
         return await this.recipeService.updateDescription(id, description);
     }
 
     @Delete('/:id')
-    async deleteRecipe(@Param('id') id: string) {
+    async deleteRecipe(@Param('id', new ParseUUIDPipe()) id: string) {
         return await this.recipeService.deleteRecipe(id);
     }
 }
