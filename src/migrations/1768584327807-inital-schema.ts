@@ -96,11 +96,11 @@ export class InitalSchema1768584327807 implements MigrationInterface {
         await queryRunner.dropForeignKey('ingredients', foreignKey);
 
         // drop fk column
-        await queryRunner.dropColumn('ingredient', 'recipeId');
+        await queryRunner.dropColumn('ingredients', 'recipeId');
 
         // drop tables
         await queryRunner.dropTable('ingredients');
-        await queryRunner.dropTable('recipients');
+        await queryRunner.dropTable('recipes');
     }
 
 }
